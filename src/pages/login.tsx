@@ -1,7 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import { useState } from "react";
+import useAuth from "../hooks/userAuth";
 
 export default function Login() {
+
+    const [email,setEmail]=useState('')
+    const [password,setPassword]=useState('')
+    const {login}=useAuth()
+    const navigate=useNavigate()
+
+    const handleLogin=async (e:React.SubmitEvent<HTMLFormElement>)=>{
+        e.preventDefault()
+
+        try{
+            await login(email,password)
+            navigate('/blogs')
+        }catch(error){
+            console.log(error)
+        }
+    }
+
   return (
     <div className="login-container">
       <div className="login-card">
@@ -10,7 +29,7 @@ export default function Login() {
           <p>Please enter your details to sign in</p>
         </div>
 
-        <form className="login-form">
+        <form className="login-form" onSubmit={handleLogin} >
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -18,6 +37,8 @@ export default function Login() {
               id="email"
               placeholder="Enter your email"
               autoComplete="off"
+              onChange={(e)=>setEmail(e.target.value)}
+              value={email}
             />
           </div>
 
@@ -29,6 +50,8 @@ export default function Login() {
               type="password"
               id="password"
               placeholder="Enter your password"
+              onChange={(e)=>setPassword(e.target.value)}
+              value={password}
             />
           </div>
 

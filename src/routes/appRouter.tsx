@@ -8,7 +8,7 @@ import Signup from "../pages/signUp"
 export default function AppRouter(){
     return (
             <Routes>
-                <Route path='/blog' element={<Blogs />} />
+                <Route path='/blogs' element={<Blogs />} />
                 <Route path='/add-blog' element={<AddBlog />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/signup' element={<Signup />} />
