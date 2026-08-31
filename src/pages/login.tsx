@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useState } from "react";
 import useAuth from "../hooks/userAuth";
+import { toast } from "react-toastify";
+
 
 export default function Login() {
 
@@ -17,7 +19,7 @@ export default function Login() {
             await login(email,password)
             navigate('/blogs')
         }catch(error){
-            console.log(error)
+           toast.error('invalid email or password')
         }
     }
 
