@@ -1,5 +1,4 @@
-
-
+import { Link } from "react-router-dom";
 import "./Login.css";
 
 export default function Login() {
@@ -39,7 +38,7 @@ export default function Login() {
         </form>
 
         <p className="login-footer">
-          Don't have an account? <a href="#signup">Sign up</a>
+          Don't have an account? <Link to={'/signup'} >Sign Up</Link>
         </p>
       </div>
     </div>

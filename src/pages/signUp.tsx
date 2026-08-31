@@ -1,4 +1,5 @@
 import "./Signup.css";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
   return (
@@ -54,7 +55,7 @@ export default function Signup() {
         </form>
 
         <p className="signup-footer">
-          Already have an account? <a href="#login">Log in</a>
+          Already have an account? <Link to='/login' >Log in</Link>
         </p>
       </div>
     </div>
