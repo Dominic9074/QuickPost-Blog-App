@@ -1,0 +1,146 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.blogs-page-container {
+  min-height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.blogs-main-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+.blogs-page-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #111111;
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.5px;
+}
+
+/* 3 Cards per Row Grid */
+.blogs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 3.5rem;
+  row-gap: 2.5rem;
+}
+
+/* Pagination */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 4rem 0 2rem;
+}
+
+.page-btn {
+  border: 1px solid #e5e5e5;
+  background-color: #ffffff;
+  color: #555555;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-btn.page-number {
+  min-width: 38px;
+  text-align: center;
+}
+
+.page-btn.active {
+  background-color: #ff6600;
+  color: #ffffff;
+  border-color: #ff6600;
+}
+
+.page-btn:hover:not(.active):not(:disabled) {
+  background-color: #f9f9f9;
+  border-color: #d1d5db;
+  color: #111111;
+}
+
+.page-btn:disabled {
+  color: #cccccc;
+  cursor: not-allowed;
+  border-color: #eeeeee;
+}
+
+/* Footer */
+.blogs-footer {
+  width: 100%;
+  border-top: 1px solid #eeeeee;
+  background-color: #ffffff;
+  padding: 2.5rem 2rem;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-logo {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: -0.5px;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.footer-links a {
+  font-size: 0.825rem;
+  color: #111111;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  color: #ff6600;
+}
+
+.footer-copyright {
+  font-size: 0.825rem;
+  color: #555555;
+}
+
+/* Responsive Grid */
+@media (max-width: 992px) {
+  .blogs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .blogs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

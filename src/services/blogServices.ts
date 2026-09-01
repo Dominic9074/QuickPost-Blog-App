@@ -1,4 +1,4 @@
-import { addDoc,collection,serverTimestamp } from "firebase/firestore";
+import { addDoc,collection,getDocs,serverTimestamp } from "firebase/firestore";
 import {db} from '../firebase/firebase'
 
 
@@ -9,5 +9,14 @@ export const createBlog=async (title:string,content:string,authorId:string)=>{
         updateAt:serverTimestamp()
     })
     return blogRef.id;
+}
+
+export const getBlog=async ()=>{
+    const snapshot=await getDocs(collection(db,'blogs'));
+
+    return snapshot.docs.map((doc)=>({
+        id:doc.id,
+        ...doc.data(),
+    }))
 }
 

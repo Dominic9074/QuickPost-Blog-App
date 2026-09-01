@@ -1,6 +1,6 @@
 import { Route,Routes } from "react-router-dom"
 
-import Blogs from '../pages/Home/blogs'
+import Blogs from '../pages/Home/BlogList'
 import AddBlog from '../pages/CreateBlog/CreateBlog'
 import Login from "../pages/login/login"
 import Signup from "../pages/SignUp/signUp"
