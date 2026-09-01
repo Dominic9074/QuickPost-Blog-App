@@ -8,51 +8,76 @@
   width: 100%;
   max-width: 600px;
   background-color: #ffffff;
-  padding: 1.5rem 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding: 2rem;
+  border-radius: 12px;
+  
+  /* Modern layered drop shadow with soft ambient blur */
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.03),
+    0 4px 16px rgba(0, 0, 0, 0.03),
+    0 10px 24px rgba(0, 0, 0, 0.02);
+  
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Premium Hover: subtle upward drift, expanded soft shadow, and crisp orange accent border */
+.blog-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 102, 0, 0.25);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 12px 28px -4px rgba(0, 0, 0, 0.08),
+    0 20px 32px -8px rgba(255, 102, 0, 0.04);
 }
 
 .blog-title {
-  font-size: 1.75rem;
+  font-size: 1.45rem;
   font-weight: 700;
-  color: #000000;
-  margin-bottom: 0.35rem;
-  letter-spacing: -0.5px;
+  color: #111827;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
 }
 
 .blog-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.85rem;
-  color: #555555;
-  margin-bottom: 0.75rem;
+  font-size: 0.825rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
 }
 
 .author-name {
-  color: #000000;
-  font-weight: 700;
+  color: #111827;
+  font-weight: 600;
 }
 
 .blog-date {
-  color: #333333;
-  font-size: 0.85rem;
+  color: #9ca3af;
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 .blog-divider {
   width: 100%;
   height: 1px;
-  background-color: #e5e5e5;
-  margin-bottom: 1.25rem;
+  background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
+  margin-bottom: 1.15rem;
 }
 
 .blog-excerpt {
-  font-size: 0.95rem;
-  color: #222222;
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
+  font-size: 0.925rem;
+  color: #4b5563;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
 
-  /* Multi-line clamp */
+  /* 2-line clamp */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -60,15 +85,19 @@
 }
 
 .read-more-link {
-  display: inline-block;
-  font-size: 0.9rem;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: #ff6600;
   text-decoration: none;
+  margin-top: auto;
+  letter-spacing: -0.01em;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .read-more-link:hover {
   color: #e65c00;
-  transform: translateX(3px);
+  transform: translateX(4px);
 }
