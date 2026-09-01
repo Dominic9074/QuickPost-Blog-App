@@ -15,6 +15,7 @@ export default function AppRouter(){
                 <Route path='/login' element={<Login />} />
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/my-blogs' element={<MyBlog />} />
+                <Route path='/edit-blog/:id' element={<AddBlog />} />
             </Routes>
     )
 }

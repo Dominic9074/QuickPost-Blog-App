@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
 import "./CreateBlog.css";
-import { createBlog } from "../../services/blogServices";
+import { createBlog, getBlogById, updateBlog } from "../../services/blogServices";
 import useAuth from "../../hooks/userAuth";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 
 interface BlogFormData{
@@ -13,9 +14,37 @@ interface BlogFormData{
 
 export default function CreateBlog() {
 
-  const {register,handleSubmit,formState:{errors}}=useForm<BlogFormData>();
+  const {register,handleSubmit,reset,formState:{errors}}=useForm<BlogFormData>();
   const {user}=useAuth()
   const navigate=useNavigate()
+  const {id}=useParams()
+
+  useEffect(()=>{
+    if(!id) return;
+
+    const fetchBlogData=async ()=>{
+      try{
+        const blog=await getBlogById(id)
+
+      if (!blog) {
+        toast.error("Blog not found");
+        navigate("/");
+        return;
+      }
+
+      reset({
+        title: blog.title,
+        content: blog.content,
+      });
+      } catch(error) {
+        toast.error("Error loading blog");
+      }
+
+    }
+
+    fetchBlogData()
+
+  },[id,reset,navigate])
 
   async function handleCreateBlog(data:BlogFormData){
     if(!user){
@@ -23,11 +52,29 @@ export default function CreateBlog() {
       return;
     }
     try{
-      await createBlog(data.title,data.content,user.uid,user.displayName ?? 'unknown user')
-      toast.success('blog created successfully')
-      navigate('/')
+
+      if(id){
+        await updateBlog(id, data.title, data.content);
+
+        toast.success("Blog updated successfully");
+        navigate('/my-blogs')
+      }else{
+        await createBlog(data.title,data.content,user.uid,user.displayName ?? 'unknown user')
+        toast.success('blog created successfully')
+        navigate('/')
+      }
+
+      
     }catch(error){
       toast.error('Error creating blog')
+    }
+  }
+
+  function handleCancel(){
+    if(id){
+      navigate('/my-blogs')
+    }else{
+      navigate('/')
     }
   }
 
@@ -35,7 +82,10 @@ export default function CreateBlog() {
     <div className="create-blog-container">
       <div className="create-blog-card">
         <div className="create-blog-header">
-          <h2>Create New <span className="highlight">Post</span></h2>
+          <h2>
+            {id ? "Edit" : "Create New"}{" "}
+            <span className="highlight">Post</span>
+          </h2>
           <p>Share your ideas, thoughts, or stories with the community</p>
         </div>
 
@@ -74,11 +124,11 @@ export default function CreateBlog() {
           </div>
 
           <div className="create-blog-actions">
-            <button type="button" className="btn-secondary" onClick={()=>navigate('/')}>
+            <button type="button" className="btn-secondary" onClick={handleCancel}>
               Cancel
             </button>
             <button type="submit" className="btn-primary">
-              Publish Post
+              {id ? "Update Post" : "Publish Post"}
             </button>
           </div>
         </form>

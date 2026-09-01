@@ -1,19 +1,46 @@
 import type { Timestamp } from "firebase/firestore";
 import "./BlogCard.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { deleteBlog } from "../services/blogServices";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 interface BlogCardProps{
+  id:string;
   title:string;
   content:string;
   createdAt:Timestamp;
   authorId:string;
   authorName:string;
-  canModify:boolean;
+  canModify?:boolean;
 }
 
-export default function BlogCard({title,content,createdAt,authorName,canModify}:BlogCardProps) {
+export default function BlogCard({title,content,createdAt,authorName,canModify,id}:BlogCardProps) {
 
   const date= createdAt.toDate().toLocaleDateString();
+  const navigate=useNavigate()
+
+  async function handleDelete(id:string){
+      const result = await Swal.fire({
+      title: "Delete this blog?",
+      text: "This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#dc2626",
+    });
+
+    if (!result.isConfirmed) return;
+
+    try{
+      await deleteBlog(id);
+      toast.success('deleted successfully')
+    }catch(error){
+      toast.error('failed to delete')
+      console.log(error)
+    }
+  }
   
   return (
     <article className="blog-card">
@@ -35,8 +62,8 @@ export default function BlogCard({title,content,createdAt,authorName,canModify}:
       </Link>
        {canModify && (
           <div className="blog-actions">
-            <button className="edit-btn">Edit</button>
-            <button className="delete-btn">Delete</button>
+            <button className="edit-btn" onClick={()=>navigate(`/edit-blog/${id}`)} >Edit</button>
+            <button className="delete-btn" onClick={()=>handleDelete(id)} >Delete</button>
           </div>
         )}
     </article>
