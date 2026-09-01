@@ -3,32 +3,30 @@ import "./Signup.css";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/userAuth";
 import { toast } from "react-toastify";
+import {useForm} from 'react-hook-form'
+
+interface SignupFormData{
+    name:string;
+    email:string;
+    password:string;
+    confirmPassword:string;
+}
 
 export default function Signup() {
 
-    const [name,setName]=useState('');
-    const [email,setEmail]=useState('');
-    const [password,setPassword]=useState('')
-    const [confirmPassword,setConfirmPassword]=useState('')
+    const {register,handleSubmit,getValues,formState:{errors}}=useForm<SignupFormData>()
 
     const {signup}=useAuth()
     const navigate=useNavigate()
 
-    const handleSignin=async (e:React.SubmitEvent<HTMLFormElement>)=>{
-        e.preventDefault()
-
-        if(password !== confirmPassword){
-            toast.error('password does not match')
-            return;
-        }
-
+    const handleSignin=async (data:SignupFormData)=>{
         try{
-            await signup(email,password)
-            navigate('/blogs')
+            await signup(data.email,data.password);
+            toast.success("Account created successfully!");
+            navigate("/blogs");
         }catch(error){
-            toast.error('failed to create Account')
+            toast.error('failed to create account')
         }
-
     }   
 
 
@@ -40,7 +38,7 @@ export default function Signup() {
           <p>Sign up to get started</p>
         </div>
 
-        <form className="signup-form" onSubmit={handleSignin} >
+        <form className="signup-form" onSubmit={handleSubmit(handleSignin)} >
           <div className="form-group">
             <label htmlFor="name">Full Name</label>
             <input
@@ -48,9 +46,14 @@ export default function Signup() {
               id="name"
               placeholder="Enter your full name"
               autoComplete="off"
-              value={name}
-              onChange={(e)=>setName(e.target.value)}
+              {...register('name',{
+                required:'name is required',
+                minLength:{value:3,message:'min 3 character'}
+              })}
             />
+            {errors.name &&(
+                <p style={{color: "#e74c3c",fontSize: "12px",margin: "5px 0 0"}}>{errors.name.message}</p>
+            )}
           </div>
 
           <div className="form-group">
@@ -60,9 +63,17 @@ export default function Signup() {
               id="email"
               placeholder="Enter your email"
               autoComplete="off"
-              value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+              {...register('email',{
+                required:'email is required',
+                pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Please enter a valid email address",
+                },
+              })}
             />
+            {errors.email &&(
+                <p style={{color: "#e74c3c",fontSize: "12px",margin: "5px 0 0"}}>{errors.email.message}</p>
+            )}
           </div>
 
           <div className="form-group">
@@ -71,9 +82,14 @@ export default function Signup() {
               type="password"
               id="password"
               placeholder="Create a password"
-              value={password}
-              onChange={(e)=>setPassword(e.target.value)}
+              {...register('password',{
+                required:'password is required',
+                minLength:{
+                    value:6,message:'password should be at least 6 character'
+                }
+              })}
             />
+            {errors.password && (<p style={{ color: "#e74c3c",fontSize: "12px",margin: "5px 0 0"}}>{errors.password.message}</p>)}
           </div>
 
           <div className="form-group">
@@ -82,9 +98,16 @@ export default function Signup() {
               type="password"
               id="confirmPassword"
               placeholder="Confirm your password"
-              value={confirmPassword}
-              onChange={(e)=>setConfirmPassword(e.target.value)}
+              {...register('confirmPassword',{
+                required:'confirmPassword is required',
+                validate:(value)=>{
+                    return value===getValues('password') || 'password does not match'
+                }
+              })}
             />
+            {errors.confirmPassword && ( <p style={{ color: "#e74c3c",  fontSize: "12px",  margin: "5px 0 0" }}>
+                   {errors.confirmPassword.message}
+                 </p>)}
           </div>
 
           <button type="submit" className="submit-btn">
