@@ -6,6 +6,7 @@ export default interface BlogInterface{
     title:string;
     content:string;
     authorId:string;
+    authorName:string;
     createdAt:Timestamp;
     updatedAt:Timestamp;
 }

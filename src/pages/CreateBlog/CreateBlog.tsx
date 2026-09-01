@@ -3,6 +3,8 @@ import "./CreateBlog.css";
 import { createBlog } from "../../services/blogServices";
 import useAuth from "../../hooks/userAuth";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 interface BlogFormData{
     title:string;
@@ -13,6 +15,7 @@ export default function CreateBlog() {
 
   const {register,handleSubmit,formState:{errors}}=useForm<BlogFormData>();
   const {user}=useAuth()
+  const navigate=useNavigate()
 
   async function handleCreateBlog(data:BlogFormData){
     if(!user){
@@ -20,8 +23,9 @@ export default function CreateBlog() {
       return;
     }
     try{
-      await createBlog(data.title,data.content,user.uid)
+      await createBlog(data.title,data.content,user.uid,user.displayName ?? 'unknown user')
       toast.success('blog created successfully')
+      navigate('/')
     }catch(error){
       toast.error('Error creating blog')
     }
@@ -61,7 +65,7 @@ export default function CreateBlog() {
               placeholder="Write your story here..."
               {...register('content',{
                 required:'content is required',
-                minLength:{value:20,message:'title should be at least 3 character'}
+                minLength:{value:20,message:'context should be at least 20 character'}
               })}
             />
             {errors.content &&(

@@ -1,22 +1,30 @@
 import { addDoc,collection,getDocs,serverTimestamp } from "firebase/firestore";
 import {db} from '../firebase/firebase'
 
-
-export const createBlog=async (title:string,content:string,authorId:string)=>{
+export const createBlog=async (title:string,content:string,authorId:string,authorName:string)=>{
     const blogRef=await addDoc(collection(db,'blogs'),{
-        title,content,authorId,
-        createAt:serverTimestamp(),
-        updateAt:serverTimestamp()
+        title,content,authorId,authorName,
+        createdAt:serverTimestamp(),
+        updatedAt:serverTimestamp(),
     })
     return blogRef.id;
 }
 
-export const getBlog=async ()=>{
+export const getBlogs=async ()=>{
     const snapshot=await getDocs(collection(db,'blogs'));
 
-    return snapshot.docs.map((doc)=>({
-        id:doc.id,
-        ...doc.data(),
-    }))
+    return snapshot.docs.map((doc) => {
+    const data = doc.data();
+
+    return {
+      id: doc.id,
+      title: data.title,
+      content: data.content,
+      authorId: data.authorId,
+      authorName:data.authorName,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
+    };
+  });
 }
 

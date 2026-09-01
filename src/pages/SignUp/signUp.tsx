@@ -20,9 +20,9 @@ export default function Signup() {
 
     const handleSignin=async (data:SignupFormData)=>{
         try{
-            await signup(data.email,data.password);
+            await signup(data.email,data.password,data.name);
             toast.success("Account created successfully!");
-            navigate("/blogs");
+            navigate("/");
         }catch(error){
             toast.error('failed to create account')
         }
