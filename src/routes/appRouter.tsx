@@ -1,9 +1,9 @@
 import { Route,Routes } from "react-router-dom"
 
-import Blogs from '../pages/blogs'
-import AddBlog from '../pages/addBlog'
-import Login from "../pages/login"
-import Signup from "../pages/signUp"
+import Blogs from '../pages/Home/blogs'
+import AddBlog from '../pages/CreateBlog/CreateBlog'
+import Login from "../pages/login/login"
+import Signup from "../pages/SignUp/signUp"
 import ProtectedRoute from "./protectedRoute"
 
 export default function AppRouter(){
