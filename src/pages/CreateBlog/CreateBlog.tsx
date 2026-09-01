@@ -37,7 +37,7 @@ export default function CreateBlog() {
         content: blog.content,
       });
       } catch(error) {
-        toast.error("Error loading blog");
+        console.error(error)
       }
 
     }
@@ -54,7 +54,7 @@ export default function CreateBlog() {
     try{
 
       if(id){
-        await updateBlog(id, data.title, data.content);
+        await updateBlog(id, data.title, data.content,user.uid);
 
         toast.success("Blog updated successfully");
         navigate('/my-blogs')
@@ -66,7 +66,11 @@ export default function CreateBlog() {
 
       
     }catch(error){
-      toast.error('Error creating blog')
+      if(error instanceof Error){
+          toast.error(error.message);
+        }else{
+          toast.error('Blog Not Updated')
+        }
     }
   }
 
