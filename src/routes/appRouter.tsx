@@ -9,7 +9,7 @@ import ProtectedRoute from "./protectedRoute"
 export default function AppRouter(){
     return (
             <Routes>
-                <Route path='/blogs' element={<Blogs />} />
+                <Route path='/' element={<Blogs />} />
                 <Route path='/add-blog' element={<ProtectedRoute> <AddBlog /> </ProtectedRoute>} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/signup' element={<Signup />} />

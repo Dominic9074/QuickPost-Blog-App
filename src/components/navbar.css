@@ -36,6 +36,11 @@
   font-weight: 500;
   position: relative;
   padding: 0.25rem 0;
+  transition: color 0.2s ease;
+}
+
+.nav-item:hover {
+  color: #ff6600;
 }
 
 .nav-item.active {
@@ -53,7 +58,16 @@
   background-color: #ff6600;
 }
 
-.nav-logout-btn {
+.user-greeting {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111111;
+  background-color: #f4f4f5;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+}
+
+.nav-btn-primary {
   background-color: #ff6600;
   color: #ffffff;
   border: none;
@@ -61,10 +75,14 @@
   padding: 0.45rem 1.1rem;
   font-size: 0.875rem;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: background-color 0.2s ease;
 }
 
-.nav-logout-btn:hover {
+.nav-btn-primary:hover {
   background-color: #e65c00;
 }

@@ -21,7 +21,7 @@ export default function Login() {
 
         try{
             await login(data.email,data.password)
-            navigate('/blogs')
+            navigate('/')
         }catch(error){
            toast.error('invalid email or password')
            console.log(error)
