@@ -57,7 +57,7 @@ export default function BlogCard({title,content,createdAt,authorName,canModify,i
 
       <p className="blog-excerpt">{content}</p>
 
-      <Link to="/blogs/1" className="read-more-link">
+      <Link to={`/blog/${id}`} className="read-more-link">
         Read More &rarr;
       </Link>
        {canModify && (
