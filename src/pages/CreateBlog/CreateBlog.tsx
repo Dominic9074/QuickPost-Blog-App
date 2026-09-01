@@ -74,7 +74,7 @@ export default function CreateBlog() {
           </div>
 
           <div className="create-blog-actions">
-            <button type="button" className="btn-secondary">
+            <button type="button" className="btn-secondary" onClick={()=>navigate('/')}>
               Cancel
             </button>
             <button type="submit" className="btn-primary">

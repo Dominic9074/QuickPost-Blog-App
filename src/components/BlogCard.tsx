@@ -8,9 +8,10 @@ interface BlogCardProps{
   createdAt:Timestamp;
   authorId:string;
   authorName:string;
+  canModify:boolean;
 }
 
-export default function BlogCard({title,content,createdAt,authorName}:BlogCardProps) {
+export default function BlogCard({title,content,createdAt,authorName,canModify}:BlogCardProps) {
 
   const date= createdAt.toDate().toLocaleDateString();
   
@@ -32,6 +33,12 @@ export default function BlogCard({title,content,createdAt,authorName}:BlogCardPr
       <Link to="/blogs/1" className="read-more-link">
         Read More &rarr;
       </Link>
+       {canModify && (
+          <div className="blog-actions">
+            <button className="edit-btn">Edit</button>
+            <button className="delete-btn">Delete</button>
+          </div>
+        )}
     </article>
   );
 }

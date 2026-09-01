@@ -1,0 +1,113 @@
+
+
+
+
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.myblogs-container {
+  min-height: calc(100vh - 70px);
+  background-color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.myblogs-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+/* Top Navigation Bar */
+.myblogs-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555555;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back-link:hover {
+  color: #ff6600;
+  transform: translateX(-3px);
+}
+
+.create-shortcut-btn {
+  background-color: #ff6600;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.create-shortcut-btn:hover {
+  background-color: #e65c00;
+}
+
+/* Header */
+.myblogs-header {
+  margin-bottom: 3rem;
+}
+
+.myblogs-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.4rem;
+}
+
+.highlight {
+  color: #ff6600;
+}
+
+.myblogs-subtitle {
+  font-size: 0.95rem;
+  color: #666666;
+}
+
+/* Grid Layout */
+.myblogs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 3.5rem;
+  row-gap: 3rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .myblogs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .myblogs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .myblogs-top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

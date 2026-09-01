@@ -26,7 +26,7 @@ export default function Blogs(){
 
             {/* 3-Column Blog Cards Grid */}
             <div className="blogs-grid">
-            {blogs.map((blog)=><BlogCard title={blog.title} content={blog.content} authorName={blog.authorName}
+            {blogs.map((blog)=><BlogCard canModify={false} title={blog.title} content={blog.content} authorName={blog.authorName}
             createdAt={blog.createdAt} authorId={blog.authorId} />)}
             </div>
 
