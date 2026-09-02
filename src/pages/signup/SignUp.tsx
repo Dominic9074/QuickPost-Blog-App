@@ -1,4 +1,4 @@
-import "./Signup.css";
+import "./SignUp.css";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/userAuth";
 import { toast } from "react-toastify";
