@@ -19,7 +19,7 @@ A blog posting application built with React, TypeScript, Firebase Authentication
 * TypeScript type safety
 * Responsive UI
 
-## Tech Stack
+## Tech Stack Used
 
 * React
 * TypeScript
