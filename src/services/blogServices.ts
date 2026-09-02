@@ -1,6 +1,6 @@
 import { addDoc,collection,getDocs,serverTimestamp,query, where, getDoc, doc, updateDoc,deleteDoc } from "firebase/firestore";
 import {db} from '../firebase/firebase'
-import useAuth from "../hooks/userAuth";
+
 
 export const createBlog=async (title:string,content:string,authorId:string,authorName:string)=>{
     const blogRef=await addDoc(collection(db,'blogs'),{
