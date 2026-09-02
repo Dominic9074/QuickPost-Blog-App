@@ -3,7 +3,7 @@ import { Route,Routes } from "react-router-dom"
 import Blogs from '../pages/Home/BlogList'
 import AddBlog from '../pages/CreateBlog/CreateBlog'
 import Login from "../pages/login/login"
-import Signup from "../pages/signup/signUp"
+import Signup from "../pages/signup/SignUp"
 import ProtectedRoute from "./protectedRoute"
 import MyBlog from "../pages/myblog/MyBlog"
 import SingleBlog from "../pages/blog/SingleBlog"
